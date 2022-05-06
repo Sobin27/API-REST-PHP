@@ -17,5 +17,7 @@ class UsersServices
 
     public function post()
     {
+        $infos = $_POST;
+        return User::Insert($infos);
     }
 }

@@ -8,19 +8,17 @@ use PDOException;
 
 class User
 {
-    private $table = 'user';
-
     public static function getUser($id)
     {
-        $table = self::$table;
-
         try {
             $db = new PDO('mysql:host=' . DBHOST . '; dbname=' . DBNAME, DBUSER, DBPASS);
+            
         } catch (PDOException $e) {
             echo 'Erro ao se conectar' . $e->getMessage();
         }
 
-        $sql = 'SELECT * FROM' . $table . 'WHERE id = :id';
+         $sql = 'SELECT * FROM user WHERE id = :id';
+        //$stmt = $db->query('SELECT * FROM user WHERE id = :id');
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':id', $id);
         $stmt->execute();
@@ -34,15 +32,13 @@ class User
 
     public static function getUsersALL()
     {
-        $table = self::$table;
-
         try {
             $db = new PDO('mysql:host=' . DBHOST . '; dbname=' . DBNAME, DBUSER, DBPASS);
         } catch (PDOException $e) {
             echo 'Erro ao se conectar' . $e->getMessage();
         }
 
-        $sql = 'SELECT * FROM' . $table;
+        $sql = 'SELECT * FROM user';
         $stmt = $db->prepare($sql);
         $stmt->execute();
 
